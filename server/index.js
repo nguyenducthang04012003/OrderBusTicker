@@ -11,6 +11,15 @@ app.use(express.json());
 const routeRoutes = require("./routes/routeRoutes");
 app.use("/api/routes", routeRoutes);
 
+const busesRoutes = require("./routes/busesRoutes");
+app.use("/api/buses", busesRoutes);
+
+const tripRoutes = require("./routes/tripRoute");
+app.use("/api/trips", tripRoutes);
+
+const ticketRoutes = require("./routes/ticketRoute");
+app.use("/api/ticket", ticketRoutes);
+
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });
