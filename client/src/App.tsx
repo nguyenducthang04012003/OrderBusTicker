@@ -2,10 +2,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import RouteList from "./page/RouteList";
-import BusesList from "./page/BussesList";
-import HomePage from "./page/homePage";
-import TicketPage from "./page/ticketPage";
+import RouteList from "./page/routeList/RouteList";
+import BusesList from "./page/busList/BussesList";
+import HomePage from "./page/homePage/homePage";
+import TicketPage from "./page/ticketPage/ticketPage";
 
 const App: React.FC = () => {
   return (

@@ -3,7 +3,7 @@
 .navbar {
   background-color: #ffffff;
   /* Màu nền của Navbar */
-  height: 80px;
+  height: 85px;
   border-bottom: 1px solid rgb(54, 150, 167);
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 20px;
+  padding: 0 20px;
 }
 
 .navbar-logo {
@@ -30,23 +30,17 @@
   margin-left: 20px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 30px;
   display: flex;
   align-items: center;
   font-weight: bold;
 }
 
-.imgNav{
-  width: 30%;
-}
-
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(5, auto);
-  /* Chia thành 3 cột tự động cho các mục */
   grid-gap: 10px;
   list-style: none;
-  /* Bỏ dấu chấm đầu dòng của list */
   text-align: center;
   width: 60vw;
   /* Chiếm 60% chiều rộng viewport */
@@ -56,7 +50,8 @@
 }
 
 .nav-item {
-  height: 80px;
+  padding-top: 1rem;
+  height: 50px;
 }
 
 .nav-links {
@@ -71,9 +66,25 @@
   font-weight: bold;
 }
 
+.btn_register{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  background-color: aqua;
+  border-radius: 50px;
+}
+
+.txt_register{
+  padding: 0;
+  margin: 0;
+  color: #000000;
+}
+
 .nav-links:hover {
   color: #009dff;
-  border-bottom: 4px solid #007bff;
   cursor: pointer;
 }
 

@@ -20,6 +20,9 @@ app.use("/api/trips", tripRoutes);
 const ticketRoutes = require("./routes/ticketRoute");
 app.use("/api/ticket", ticketRoutes);
 
+const seatRoute = require("./routes/seatRoute");
+app.use("/api/seat", seatRoute);
+
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });

@@ -66,9 +66,9 @@ const Navbar: React.FC = () => {
             </div>
           </li>
           <li className="nav-item">
-            <div className="nav-links" onClick={handleAboutClick}>
+            <div className="btn_register" onClick={handleAboutClick}>
               {" "}
-              Giới thiệu
+              <p className="txt_register">Đăng ký thông tin</p>
             </div>
           </li>
         </ul>
