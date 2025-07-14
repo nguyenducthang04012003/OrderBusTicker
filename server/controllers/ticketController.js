@@ -1,5 +1,30 @@
 const ticketModel = require("../models/ticketModel");
 
+exports.getTicketsByPhoneNumber = async (req, res) => {
+  const { phoneNumber } = req.query;
+
+  if (!phoneNumber) {
+    return res
+      .status(400)
+      .json({ message: "Số điện thoại không được để trống." });
+  }
+
+  try {
+    const tickets = await ticketModel.findTicketsByPhoneNumber(phoneNumber); 
+
+    if (tickets.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy vé nào với số điện thoại này." });
+    }
+
+    res.json(tickets);
+  } catch (err) {
+    console.error("Lỗi Controller khi tìm kiếm vé theo số điện thoại:", err);
+    res.status(500).json({ error: "Lỗi server khi tìm kiếm vé." });
+  }
+};
+
 exports.bookTicket = async (req, res) => {
   try {
     const { user_id, trip_id, seat_id, status } = req.body;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./Navbar.css"; // Import file CSS cho Navbar
+import "./Navbar.css";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate(); 
@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
   };
 
   const handleTicketClick = () => {
-    navigate("/ticket");
+    navigate("/checkticket");
   };
 
   const handleAboutClick = () => {
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
           <li className="nav-item">
             <div className="btn_register" onClick={handleAboutClick}>
               {" "}
-              <p className="txt_register">Đăng ký thông tin</p>
+              <p className="txt_register">Đặt vé ngay</p>
             </div>
           </li>
         </ul>

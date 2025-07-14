@@ -4,7 +4,7 @@
   background-color: #ffffff;
   /* Màu nền của Navbar */
   height: 85px;
-  border-bottom: 1px solid rgb(54, 150, 167);
+  border-bottom: 1px solid rgb(232, 92, 45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@
 }
 
 .navbar-logo {
-  color: #000000;
+  color: rgb(232, 92, 45);
   justify-self: start;
   margin-left: 20px;
   cursor: pointer;
@@ -51,7 +51,7 @@
 
 .nav-item {
   padding-top: 1rem;
-  height: 50px;
+  height: 60px;
 }
 
 .nav-links {
@@ -63,7 +63,7 @@
   height: 100%;
   transition: all 0.2s ease-out;
   /* Hiệu ứng chuyển động khi hover */
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .btn_register{
@@ -71,65 +71,33 @@
   align-items: center;
   font-weight: bold;
   text-decoration: none;
-  padding: 0 1rem;
+  padding: 0 2rem;
   height: 100%;
-  background-color: aqua;
+  background-color: rgb(232, 92, 45);
   border-radius: 50px;
+}
+
+.btn_register:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .txt_register{
   padding: 0;
   margin: 0;
-  color: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+
+.txt_register:hover{
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
 .nav-links:hover {
-  color: #009dff;
+  color: rgb(232, 92, 45);
   cursor: pointer;
-}
-
-/* Responsive (Tùy chọn: Dành cho màn hình nhỏ hơn) */
-@media screen and (max-width: 960px) {
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 80px;
-    left: -100%;
-    /* Ẩn menu khi màn hình nhỏ */
-    opacity: 1;
-    transition: all 0.5s ease;
-    background: #333;
-    /* Màu nền cho menu khi mở ra */
-  }
-
-  .nav-menu.active {
-    /* Class này sẽ được thêm/bỏ khi menu mở/đóng */
-    left: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-  }
-
-  .nav-links {
-    text-align: center;
-    padding: 2rem;
-    width: 100%;
-    display: table;
-  }
-
-  .nav-links:hover {
-    background-color: #555;
-    color: #fff;
-    border-radius: 0;
-  }
-
-  .navbar-logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 50%);
-  }
 }

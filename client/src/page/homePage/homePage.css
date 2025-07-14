@@ -1,0 +1,70 @@
+.head-homepage{
+  position: relative;
+  width: 100%;
+}
+
+.img-home{
+  display: block;
+  width: 100%;
+  height: 650px;
+  object-position: center;
+}
+
+.information-head{
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  width: 30%;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.635) ;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.txt-head {
+  margin: 5px 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.information-head hr {
+  border: 1px solid rgb(0, 0, 0);
+  width: 50%;
+  margin: 10px auto;
+}
+
+.highlight-route {
+  color: rgb(0, 128, 255);
+  font-weight: bold;
+}
+
+.highlightred-route {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.bottom-head{
+  width: 100%;
+  position: absolute;
+  top: 90%;
+  padding: 20px 20%;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  background-color: rgba(83, 88, 92, 0.704);
+}
+
+.item-bottom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.item-bottom p {
+  color: white;
+  padding: 0;
+  margin: 0;
+}
