@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Navbar.css";
 
 const Navbar: React.FC = () => {
+
   const navigate = useNavigate(); 
 
   const handleHomeClick = () => {

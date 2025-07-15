@@ -1,3 +1,7 @@
+.homepage-container{
+  background-color: #eeecec;
+}
+
 .head-homepage{
   position: relative;
   width: 100%;
@@ -65,6 +69,151 @@
 
 .item-bottom p {
   color: white;
+  padding: 0;
+  margin: 0;
+}
+
+.body-homepage{
+  padding: 10px 10px 30px 10px;
+}
+
+.body-homepage__title{
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 20px;
+}
+
+.popular-routes-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 0 10%;
+}
+
+.route-item {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+
+.route-item:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.route-item__image {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.route-item__type{
+  margin-top: 10px;
+  background-color: antiquewhite;
+  width: 60%;
+  border-radius: 10px;
+}
+
+.route-item__type-text{
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.route-item__location-origin{
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: aqua;
+}
+
+.route-item__location-destination{
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: red;
+}
+
+.route-item__price{
+  background-color: rgb(232, 92, 45);
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.route-item__price-text{
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.service_container{
+  background-color: rgb(232, 92, 45);
+  margin: 0 10%;
+  padding: 10px 0;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+
+.tiltle_service{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.service_content{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 0 5%;
+}
+
+.service_container_item{
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+
+.txt_item{
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-top: 10px;
+}
+
+.txt2_item{
+  font-size: 1.5rem;
+}
+
+.regulations{
+  color: #fff;
+}
+
+.author_design{
+  background-color: rgb(232, 92, 45);
+  margin-top: 20px;
+  padding: 15px;
+}
+
+.author_txt{
   padding: 0;
   margin: 0;
 }

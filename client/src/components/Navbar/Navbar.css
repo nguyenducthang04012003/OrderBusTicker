@@ -62,7 +62,6 @@
   padding: 0 1rem;
   height: 100%;
   transition: all 0.2s ease-out;
-  /* Hiệu ứng chuyển động khi hover */
   font-weight: 500;
 }
 
@@ -94,10 +93,11 @@
 
 .txt_register:hover{
   color: #ffffff;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .nav-links:hover {
   color: rgb(232, 92, 45);
   cursor: pointer;
+  transform: scale(1.05);
 }
