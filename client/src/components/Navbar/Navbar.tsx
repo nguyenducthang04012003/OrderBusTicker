@@ -1,80 +1,64 @@
 // frontend/src/components/Navbar/Navbar.tsx
 
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import BookingTicket from "../bookingTicket/bookingTicket";
 
 const Navbar: React.FC = () => {
-
-  const navigate = useNavigate(); 
-
-  const handleHomeClick = () => {
-    navigate("/"); 
-  };
-
-  const handleRoutesClick = () => {
-    navigate("/route"); 
-  };
-
-  const handleBusesClick = () => {
-    navigate("/buses");
-  };
-
-  const handleTicketClick = () => {
-    navigate("/checkticket");
-  };
-
-  const handleAboutClick = () => {
-    navigate("/about");
-  };
-
-  const handleLogoClick = () => {
-    navigate("/");
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        {/* Tên hoặc Logo của ứng dụng - Sử dụng onClick */}
-        <div className="navbar-logo" onClick={handleLogoClick}>
-          BusTicket
-        </div>
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-logo" onClick={() => navigate("/")}>
+            BusTicket
+          </div>
 
-        {/* Các mục điều hướng - Sử dụng onClick */}
-        <ul className="nav-menu">
-          <li className="nav-item">
-            <div className="nav-links" onClick={handleHomeClick}>
-              {" "}
-              Trang chủ
-            </div>
-          </li>
-          <li className="nav-item">
-            <div className="nav-links" onClick={handleRoutesClick}>
-              {" "}
-              Tuyến đường
-            </div>
-          </li>
-          <li className="nav-item">
-            <div className="nav-links" onClick={handleBusesClick}>
-              {" "}
-              Danh sách xe
-            </div>
-          </li>
-          <li className="nav-item">
-            <div className="nav-links" onClick={handleTicketClick}>
-              {" "}
-              Kiểm tra vé
-            </div>
-          </li>
-          <li className="nav-item">
-            <div className="btn_register" onClick={handleAboutClick}>
-              {" "}
-              <p className="txt_register">Đặt vé ngay</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          <ul className="nav-menu">
+            <li className="nav-item">
+              <div className="nav-links" onClick={() => navigate("/")}>
+                Trang chủ
+              </div>
+            </li>
+            <li className="nav-item">
+              <div className="nav-links" onClick={() => navigate("/route")}>
+                Tuyến đường
+              </div>
+            </li>
+            <li className="nav-item">
+              <div className="nav-links" onClick={() => navigate("/buses")}>
+                Danh sách xe
+              </div>
+            </li>
+            <li className="nav-item">
+              <div
+                className="nav-links"
+                onClick={() => navigate("/checkticket")}
+              >
+                Kiểm tra vé
+              </div>
+            </li>
+            <li className="nav-item">
+              <button
+                className="btn_register"
+                onClick={() => setIsModalOpen(true)}
+              >
+                <p className="txt_register">Đặt vé ngay</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      {/* Modal được render tách riêng bên ngoài nav */}
+      <BookingTicket
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 const ticketModel = require("../models/ticketModel");
+const userModel = require('../models/userModel'); 
 
 exports.getTicketsByPhoneNumber = async (req, res) => {
   const { phoneNumber } = req.query;
@@ -10,7 +11,7 @@ exports.getTicketsByPhoneNumber = async (req, res) => {
   }
 
   try {
-    const tickets = await ticketModel.findTicketsByPhoneNumber(phoneNumber); 
+    const tickets = await ticketModel.findTicketsByPhoneNumber(phoneNumber);
 
     if (tickets.length === 0) {
       return res
@@ -27,20 +28,34 @@ exports.getTicketsByPhoneNumber = async (req, res) => {
 
 exports.bookTicket = async (req, res) => {
   try {
-    const { user_id, trip_id, seat_id, status } = req.body;
-    const result = await ticketModel.createTicket(
-      user_id,
+    const { name, phone, email, trip_id, seat_id } = req.body;
+
+    if (!name || !phone || !email || !trip_id || !seat_id) {
+      return res.status(400).json({ error: "Thiếu thông tin bắt buộc" });
+    }
+
+    // Kiểm tra user đã tồn tại chưa
+    let user = await userModel.findUserByEmail(email);
+    if (!user) {
+      // Tạo user mới
+      const result = await userModel.createUser(name, phone, email);
+      user = { id: result.insertId };
+    }
+
+    // Tạo vé mới
+    const resultTicket = await ticketModel.createTicket(
+      user.id,
       trip_id,
       seat_id,
-      status
+      "booked"
     );
-    res
-      .status(201)
-      .json({ message: "Đặt vé thành công", ticketId: result.insertId });
+
+    res.status(201).json({
+      message: "Đặt vé thành công",
+      ticketId: resultTicket.insertId,
+    });
   } catch (error) {
     console.error("Lỗi khi đặt vé:", error.message);
-
-    // Bắt lỗi trigger SQL và phản hồi rõ ràng
     if (
       error.message.includes("Seat is not available") ||
       error.message.includes("Invalid seat for this trip")
@@ -49,7 +64,6 @@ exports.bookTicket = async (req, res) => {
         .status(400)
         .json({ error: "Không thể đặt vé", details: error.message });
     }
-
     res.status(500).json({ error: "Lỗi server", details: error.message });
   }
 };

@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const HomePage: React.FC = () => {
+
   return (
     <div className="homepage-container">
       <div className="head-homepage">

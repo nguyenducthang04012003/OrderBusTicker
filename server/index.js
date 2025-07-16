@@ -23,6 +23,9 @@ app.use("/api/ticket", ticketRoutes);
 const seatRoute = require("./routes/seatRoute");
 app.use("/api/seat", seatRoute);
 
+const userRoutes = require("./routes/userRoute")
+app.use("/api/users", userRoutes);
+
 app.listen(PORT, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
 });
