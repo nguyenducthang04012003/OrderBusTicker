@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./bookingTicket.css";
+import API from "../../services/api";
 
 type BookingTicketProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+interface Seat {
+  seat_id: number;
+  seat_number: number;
+  seat_type: string;
+  status: string;
+}
 
 const BookingTicket: React.FC<BookingTicketProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -14,8 +22,8 @@ const BookingTicket: React.FC<BookingTicketProps> = ({ isOpen, onClose }) => {
     trip_id: "",
     seat_id: "",
   });
-
-  if (!isOpen) return null;
+  const [seats, setSeats] = useState<Seat[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).classList.contains("modal-overlay")) {
@@ -23,10 +31,31 @@ const BookingTicket: React.FC<BookingTicketProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!isOpen || !formData.trip_id) return;
+
+    const fetchSeat = async () => {
+      try {
+        setLoading(true);
+        const response = await API.get(`/seat/check-seat/${formData.trip_id}`);
+        setSeats(response.data);
+      } catch (err) {
+        console.error("Lỗi khi lấy danh sách ghế:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSeat();
+  }, [formData.trip_id]);
+
+  if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,67 +88,88 @@ const BookingTicket: React.FC<BookingTicketProps> = ({ isOpen, onClose }) => {
     }
   };
 
-
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-container">
-        <h2>Nhập thông tin</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Tên:</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+        <h2>Đặt vé</h2>
+        <hr />
+        <p>Nhập thông tin cá nhân</p>
+        <form className="form_information" onSubmit={handleSubmit}>
+          <div className="inpt_information">
+            <label htmlFor="name">Họ và Tên:</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="phone">Số điện thoại:</label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
+          <div className="inpt_information">
+            <label htmlFor="phone">Số điện thoại:</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <div className="inpt_information">
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="trip_id">Trip ID:</label>
-          <input
-            id="trip_id"
-            name="trip_id"
-            type="text"
-            value={formData.trip_id}
-            onChange={handleChange}
-            required
-          />
+          <div className="inpt_information">
+            <label htmlFor="trip_id">Mã xe:</label>
+            <input
+              id="trip_id"
+              name="trip_id"
+              type="text"
+              value={formData.trip_id}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <label htmlFor="seat_id">Seat ID:</label>
-          <input
-            id="seat_id"
-            name="seat_id"
-            type="text"
-            value={formData.seat_id}
-            onChange={handleChange}
-            required
-          />
-
-          <button type="submit">Đặt vé</button>
-          <button type="button" className="btn-close" onClick={onClose}>
+          <div>
+            <label htmlFor="seat_id">Chọn ghế:</label>
+            <select
+              id="seat_id"
+              name="seat_id"
+              value={formData.seat_id}
+              onChange={handleChange}
+              required
+            >
+              <option value="">-- Chọn ghế --</option>
+              {seats.map((seat) => (
+                <option key={seat.seat_number} value={seat.seat_number}>
+                  Ghế {seat.seat_number} ({seat.seat_type}) -{" "}
+                  {seat.status === "available" ? "Trống" : "Đã đặt"}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
+        <div className="btn_infor">
+          <button className="btn_submit" type="submit">
+            Đặt vé
+          </button>
+          <button type="button" className="btn_close" onClick={onClose}>
             Đóng
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

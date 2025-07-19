@@ -7,6 +7,7 @@ import BusesList from "./page/busList/BussesList";
 import HomePage from "./page/homePage/homePage";
 import TicketPage from "./page/ticketPage/ticketPage";
 import CheckTicket from "./components/checkTicker/checkTicket";
+import BookingTicket from "./components/bookingTicket/bookingTicket";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,11 @@ const App: React.FC = () => {
           <Route path="/buses" element={<BusesList />} />
           <Route path="/ticket" element={<TicketPage />} />
           <Route path="/checkticket" element={<CheckTicket />} />
+          <Route
+            path="/bookingticket"
+            element={<BookingTicket isOpen={true} onClose={() => {}} />}
+          />
+
           <Route
             path="/"
             element={

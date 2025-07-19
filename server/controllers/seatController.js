@@ -1,7 +1,7 @@
 // controllers/seatController.js
 const {
   getSeatsByBusId,
-  isSeatAvailable,
+  getSeatsByTripId,
   updateSeatAvailability,
 } = require("../models/seatModel");
 
@@ -16,30 +16,17 @@ exports.getSeatsByBus = async (req, res) => {
   }
 };
 
-exports.checkSeatAvailability = async (req, res) => {
-  try {
-    const { seatId, tripId } = req.query;
 
-    if (!seatId || !tripId) {
-      return res.status(400).json({ error: "Missing seatId or tripId" });
-    }
+exports.getSeatsByTripId = async (req, res) => {
+  try{
+    const tripId = parseInt(req.params.tripId);
 
-    const parsedSeatId = parseInt(seatId);
-    const parsedTripId = parseInt(tripId);
-
-    if (isNaN(parsedSeatId) || isNaN(parsedTripId)) {
-      return res.status(400).json({ error: "Invalid seatId or tripId" });
-    }
-
-    const isAvailable = await isSeatAvailable(parsedSeatId, parsedTripId);
-    res.status(200).json({
-      seatId: parsedSeatId,
-      tripId: parsedTripId,
-      isAvailable: isAvailable,
-    });
-  } catch (err) {
-    console.error("Lỗi kiểm tra ghế:", err.message);
-    res.status(500).json({ error: "Lỗi server nội bộ" });
+    if(!tripId)  return res.status(400).json({error: "tripId khoong hop le"}); 
+      const seats = await getSeatsByTripId(tripId);
+      res.status(200).json(seats);
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách ghế", error.message);
+    res.status(500).json({error: "Lỗi khi lấy danh sách ghế"});
   }
 };
 

@@ -13,34 +13,29 @@ const getSeatsByBusId = async (busId) => {
   return rows;
 };
 
-module.exports = {
-  getSeatsByBusId,
-};
 
-
-/**
- * Kiểm tra ghế có sẵn dựa trên seat_id và trip_id
- * @param {number} seatId - ID của ghế
- * @param {number} tripId - ID của chuyến xe
- * @returns {Promise<boolean>} Trả về true nếu ghế có sẵn, false nếu không
- */
-const isSeatAvailable = async (seatId, tripId) => {
-  const connection = await pool.getConnection();
-  try {
-    const [rows] = await connection.query(
-      `
-        SELECT s.is_available
-        FROM seats s
-        JOIN trips t ON s.bus_id = t.bus_id
-        WHERE s.id = ? AND t.id = ? AND s.is_available = TRUE
-      `,
-      [seatId, tripId]
-    );
-    return rows.length > 0;
-  } finally {
-    connection.release();
-  }
-};
+const getSeatsByTripId = async (tripId) => {
+  const [rows] = await pool.query(
+    `
+    SELECT 
+      s.id AS seat_id,
+      s.seat_number,
+      s.seat_type,
+      CASE 
+        WHEN t.id IS NOT NULL THEN 'booked'
+        ELSE 'available'
+      END AS status
+    FROM trips tr
+    JOIN buses b ON tr.bus_id = b.id
+    JOIN seats s ON s.bus_id = b.id
+    LEFT JOIN tickets t ON t.seat_id = s.id AND t.trip_id = tr.id
+    WHERE tr.id = ?
+    ORDER BY s.seat_number
+    `,
+    [tripId]
+  );
+  return rows;
+}
 
 /**
  * Cập nhật trạng thái ghế (thường dùng khi đặt vé)
@@ -67,6 +62,6 @@ const updateSeatAvailability = async (seatId, isAvailable) => {
 
 module.exports = {
   getSeatsByBusId,
-  isSeatAvailable,
+  getSeatsByTripId,
   updateSeatAvailability,
 };
