@@ -3,7 +3,7 @@ import API from "../../services/api";
 
 // Interface cho Route
 interface Route {
-  id: number;
+  route_id: number;
   origin: string;
   destination: string;
   departure_time: string;
@@ -18,8 +18,8 @@ const RouteList: React.FC = () => {
 
   useEffect(() => {
     const fetchRoutes = async () => {
-      setLoading(true); 
-      setError(null); 
+      setLoading(true);
+      setError(null);
       try {
         const res = await API.get("/routes");
         setRoutes(res.data);
@@ -46,10 +46,9 @@ const RouteList: React.FC = () => {
       {!loading && !error && routes.length > 0 && (
         <ul>
           {routes.map((route) => (
-            <li key={route.id}>
+            <li key={route.route_id}>
               {route.origin} &rarr; {route.destination} (
-              {route.estimated_duration_minutes} phút) (
-              {route.price.toLocaleString("vi-VN")} VNĐ) (
+              {route.estimated_duration_minutes} phút) ({route.price} VNĐ) (
               {route.departure_time})
             </li>
           ))}

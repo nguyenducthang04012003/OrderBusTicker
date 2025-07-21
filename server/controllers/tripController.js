@@ -10,6 +10,22 @@ const getAllTrips = async (req, res) => {
   }
 };
 
+const getTripIdByRoute = async (req, res) => {
+  try {
+    const routeId = parseInt(req.params.routeId);
+    if (isNaN(routeId))
+      return res.status(400).json({ error: "routeId không hợp lệ" });
+
+    const trips = await tripModel.findTripsByRouteId(routeId);
+    console.log(">>>>>", trips);
+    res.status(200).json(trips);
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách tripid:", error); // In rõ lỗi
+    res.status(500).json({ error: "Lỗi khi lấy danh sách tripid" });
+  }
+};
+
 module.exports = {
   getAllTrips,
+  getTripIdByRoute,
 };

@@ -143,9 +143,21 @@ const CheckTicker: React.FC = () => {
 
                 <p className="ticket_card__departure">
                   <strong className="ticket_card__label">
-                    Thời gian khởi hành:
+                    Ngày khởi hành:
                   </strong>{" "}
-                  {ticket.tripDepartureTime}
+                  {new Date(ticket.tripDepartureTime).toLocaleDateString("vi-VN")}
+                </p>
+
+                <p className="ticket_card__departure">
+                  <strong className="ticket_card__label">Giờ khởi hành:</strong>{" "}
+                  {new Date(ticket.tripDepartureTime).toLocaleTimeString(
+                    "vi-VN",
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    }
+                  )}
                 </p>
 
                 <p className="ticket_card__price">
@@ -160,12 +172,14 @@ const CheckTicker: React.FC = () => {
 
                 <p className="ticket_card__seat">
                   <strong className="ticket_card__label">Ghế:</strong> Số{" "}
-                  {ticket.seatNumber} ({ticket.seatType})
+                  {ticket.seatNumber}
                 </p>
 
                 <p className="ticket_card__status">
-                  <strong className="ticket_card__label">Trạng thái vé: </strong>{" "}
-                  <span style={{ color, fontSize:"20px" }}>{label}</span>
+                  <strong className="ticket_card__label">
+                    Trạng thái vé:{" "}
+                  </strong>{" "}
+                  <span style={{ color, fontSize: "20px" }}>{label}</span>
                 </p>
 
                 <p className="ticket_card__booked-at">

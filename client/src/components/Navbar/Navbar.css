@@ -9,11 +9,19 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: sticky;
-  /* Giúp Navbar cố định ở trên cùng */
+  position: fixed;
   top: 0;
   z-index: 999;
   /* Đảm bảo Navbar nằm trên các nội dung khác */
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar.hide {
+  transform: translateY(-100%);
+}
+
+.navbar.show {
+  transform: translateY(0);
 }
 
 .navbar-container {

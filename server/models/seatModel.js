@@ -24,7 +24,9 @@ const getSeatsByTripId = async (tripId) => {
       CASE 
         WHEN t.id IS NOT NULL THEN 'booked'
         ELSE 'available'
-      END AS status
+      END AS status,
+      tr.departure_time,
+      tr.price
     FROM trips tr
     JOIN buses b ON tr.bus_id = b.id
     JOIN seats s ON s.bus_id = b.id

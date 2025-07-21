@@ -10,6 +10,15 @@ const getAllTrips = async () => {
   return rows;
 };
 
+const findTripsByRouteId = async (routeId) => {
+  const [rows] = await pool.query(
+    `SELECT id, bus_id, route_id, departure_time, price FROM trips WHERE route_id = ?`,
+    [routeId]
+  );
+  return rows;
+};
+
 module.exports = {
   getAllTrips,
+  findTripsByRouteId,
 };

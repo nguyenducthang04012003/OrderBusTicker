@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
               <p className="route-item__location-destination">
                 {" "}
                 <FontAwesomeIcon icon={faMapLocation} />
-                Hà Nội
+                Đà Nẵng
               </p>
             </div>
 
@@ -158,7 +158,7 @@ const HomePage: React.FC = () => {
               <p className="route-item__location-destination">
                 {" "}
                 <FontAwesomeIcon icon={faMapLocation} />
-                Hà Nội
+                Hồ Chí Minh
               </p>
             </div>
 
